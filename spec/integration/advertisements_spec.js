@@ -102,7 +102,7 @@ describe("routes : advertisements", () => {
                     Advertisement.all()
                     .then((advertisements)=> {
                         expect(err).toBeNull();
-                        expect(advertisements.length).toBe(advertisementCountBeforeDelete -1);
+                        expect(advertisements.length).toBe(advertisementCountBeforeDelete - 1);
                         done();
                     })
                 });
