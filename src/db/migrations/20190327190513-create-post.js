@@ -29,7 +29,7 @@ module.exports = {
         onDelete: "CASCADE",
         allowNull: false,
         references: {
-          model: "Topic",
+          model: "Topics",
           key: "id",
           as: "topicId"
         },
