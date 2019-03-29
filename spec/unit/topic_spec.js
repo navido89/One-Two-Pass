@@ -4,22 +4,22 @@ const Post = require("../../src/db/models").Post;
 describe("Topic", () => {
 
   beforeEach((done) => {
-    //#1
+    
     this.topic;
     this.post;
     sequelize.sync({force: true}).then((res) => {
 
-      //#2
+      
       Topic.create({
-        title: "Expeditions to Alpha Centauri",
-        description: "A compilation of reports from recent visits to the star system."
+        title: "World Cup",
+        description: "This is a review of a soccer tournament"
       })
       .then((topic) => {
         this.topic = topic;
-        //#3
+        
         Post.create({
-          title: "My first visit to Proxima Centauri b",
-          body: "I saw some rocks.",
+          title: "My thoughts",
+          body: "I think it was fun",
           //#4
           topicId: this.topic.id
         })
@@ -38,13 +38,13 @@ describe("Topic", () => {
   describe("#create()", () => {
     it("should create a topic object with a title,and description", (done) => {
       Topic.create({
-        title: "Pros of Cryosleep during the long journey",
-        description: "1. Not having to answer the 'are we there yet?' question.",
+        title: "Pros and Cons of Brexit",
+        description: "A review of the pros and cons of Brexit",
 
       })
       .then((topic) => {
-        expect(topic.title).toBe("Pros of Cryosleep during the long journey");
-        expect(topic.description).toBe("1. Not having to answer the 'are we there yet?' question.");
+        expect(topic.title).toBe("Pros and Cons of Brexit");
+        expect(topic.description).toBe("A review of the pros and cons of Brexit");
         done();
 
       })
@@ -59,8 +59,8 @@ describe("Topic", () => {
     it("should associate a topic and a post together", (done) => {
 
       Post.create({
-        title: "Challenges of interstellar travel",
-        body: "1. The Wi-Fi is terrible",
+        title: "NBA Review",
+        body: "This is a NBA Season review",
         topicId:this.topic.id
       })
 
@@ -68,13 +68,13 @@ describe("Topic", () => {
         expect(newPost.topicId).toBe(this.topic.id);
         newPost.setTopic(this.topic)
         .then((post) => {
-          // #4
+          
           expect(post.topicId).toBe(this.topic.id);
           this.topic.getPosts()
           .then((associatedPosts) => {
-            expect(associatedPosts[0].title).toBe("My first visit to Proxima Centauri b"
+            expect(associatedPosts[0].title).toBe("My thoughts"
           );
-          expect(associatedPosts[1].title).toBe("Challenges of interstellar travel")
+          expect(associatedPosts[1].title).toBe("NBA Review")
 
           done();
         });
