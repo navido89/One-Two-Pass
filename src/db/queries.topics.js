@@ -30,17 +30,22 @@ module.exports = {
   },
 
   getTopic(id, callback){
-      
+    
     return Topic.findById(id, {
+      
       include: [{
               model: Post,
               as: "posts"
             }]
+    
           })
+          
     .then((topic) => {
+      console.log(topic);
       callback(null, topic);
     })
     .catch((err) => {
+      console.log(err);
       callback(err);
     })
   },
