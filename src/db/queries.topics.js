@@ -41,11 +41,11 @@ module.exports = {
           })
           
     .then((topic) => {
-      console.log(topic);
+      
       callback(null, topic);
     })
     .catch((err) => {
-      console.log(err);
+      
       callback(err);
     })
   },
