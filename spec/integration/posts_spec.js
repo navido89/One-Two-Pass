@@ -14,7 +14,7 @@ describe("routes : posts", () => {
 
     sequelize.sync({force: true}).then((res) => {
 
-//#1
+
       Topic.create({
         title: "Winter Games",
         description: "Post your Winter Games stories."
