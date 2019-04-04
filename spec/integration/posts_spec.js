@@ -178,7 +178,8 @@ describe("POST /topics/:topicId/posts/:id/update", () => {
          const options = {
            url: `${base}/${this.topic.id}/posts/${this.post.id}/update`,
            form: {
-             title: "Snowman Building Competition"
+             title: "Snowman Building Competition",
+             body: "Not fun at all"
            }
          };
          request.post(options,
