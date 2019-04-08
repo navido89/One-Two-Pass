@@ -10,8 +10,7 @@ module.exports = {
         
         if (errors) {
             req.flash("error", errors);
-<<<<<<< HEAD
-=======
+
             return res.redirect(303, req.headers.referer)
         } else {
             return next();
@@ -27,7 +26,7 @@ module.exports = {
 
         if(errors){
             req.flash("error", errors);
->>>>>>> Validations-Assignment
+
             return res.redirect(303, req.headers.referer)
         } else {
             return next();
