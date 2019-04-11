@@ -29,7 +29,7 @@ module.exports = {
       if (err){
         res.redirect(500, "/posts/new");
       } else {
-        res.redirect(300, `/topics/${newPost.topicId}/posts/${post.id}`);
+       res.redirect(303, `/topics/${newPost.topicId}/posts/${post.id}`);
       }
     });
   } else {
