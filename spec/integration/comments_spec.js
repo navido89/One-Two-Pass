@@ -126,6 +126,26 @@ describe("routes : comments", () => {
     describe("signed in user performing CRUD actions for Comment", () => {
 
         beforeEach((done) => {
+            this.atlernateUser;
+            this.alternateComment;
+
+            User.create({
+                email: "ali@apple.com",
+                password: "123456789",
+                comments: [{
+                    body: "hello world",
+                    postId: this.post.id
+                }]
+            }, {
+                include: {
+                    model: Comment,
+                    as: "comments"
+                }
+            })
+            .then((alternateUser) => {
+                this.alternateUser = alternateUser;
+                this.alternateComment = alternateUser.comments[0];
+            
             request.get({
                 url: "http://localhost:3000/auth/fake",
                 form: {
@@ -136,6 +156,7 @@ describe("routes : comments", () => {
                 done();
             } 
             );
+          })
         });
 
         describe("POST /topics/:topicId/posts/postId/comments/create", () => {
@@ -170,7 +191,7 @@ describe("routes : comments", () => {
                 .then((comments) => {
                     const commentCountBeforeDelete = comments.length;
 
-                    expect(commentCountBeforeDelete).toBe(1);
+                    expect(commentCountBeforeDelete).toBe(2);
 
                     request.post(`${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`, (err, res, body) => {
                         expect(res.statusCode).toBe(302);
@@ -183,6 +204,57 @@ describe("routes : comments", () => {
                     });
                 })
             });
+
+            it("member should not delete the comment of another member", (done) => {
+                Comment.all()
+                .then((comments) => {
+                    const commentCountBeforeDelete = comments.length;
+
+                    expect(commentCountBeforeDelete).toBe(2);
+                    
+                    request.post(`${base}${this.topic.id}/posts/${this.post.id}/comments/${this.alternateComment.id}/destroy`, (err, res, body) => {
+                        
+                        Comment.all()
+                        .then((comments) => {
+                            expect(err).toBeNull();
+                            expect(comments.length).toBe(commentCountBeforeDelete);
+                            done();  
+                        })
+                    });
+                })
+            });
+
+            it("admin is able to delete a comment from members", (done) => {
+                request.get({
+                    url: "http://localhost:3000/auth/fake",
+                    form: {
+                        role: "admin",
+                        userId: this.user.id
+                    }
+                }, (err, res, body) => {
+                    done();
+                } 
+                );
+                Comment.all()
+                .then((comments) => {
+
+                    const commentCountBeforeDelete = comments.length;
+
+                    expect(commentCountBeforeDelete).toBe(2);
+
+                    request.post(`${base}${this.topic.id}/posts/${this.post.id}/comments/${this.comment.id}/destroy`, (err, res, body) => {
+                        Comment.all()
+                        .then((comments) => {
+                            expect(err).toBeNull();
+                            expect(comments.length).toBe(commentCountBeforeDelete -1);
+                            done();
+                        })
+                    });
+                })
+            });
+            
+        
+
         });
 
 
