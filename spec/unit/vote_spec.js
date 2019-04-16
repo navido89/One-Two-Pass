@@ -117,6 +117,22 @@ describe("Vote", () => {
             done();
         })
     });
+
+    it("should not create a vote with a value of anything other thatn 1 or -1", (done) => {
+      Vote.create({
+        value: 2,
+        postId: this.post.id,
+        userId: this.user.id
+      })
+      .then((vote) => {
+        done();
+      })
+      .catch((err) => {
+        expect(err.message).toContain("value has to be 1 or -1 in order to create a vote");
+        done();
+      })
+    });
+    
   });
 
   describe("#setUser()", () => {
