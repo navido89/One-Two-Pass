@@ -5,6 +5,7 @@ const Comment = require("./models").Comment;
 const User = require("./models").User;
 
 const Authorizer = require("../policies/post");
+const Vote = require("./models").Vote;
 
 
 module.exports = {
@@ -23,7 +24,7 @@ module.exports = {
           include: [
             {model: Comment, as: "comments", include: [
               {model: User }
-            ]}
+            ]}, {model: Vote, as: "votes"}
           ]
         })
         .then((post) => {
