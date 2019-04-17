@@ -111,7 +111,7 @@ describe("Favorite", () => {
 
             User.create({
                 email: "bob@example.com",
-                passwrod: "password"
+                password: "password"
             })
             .then((newUser) => {
                 this.favorite.setUser(newUser)
