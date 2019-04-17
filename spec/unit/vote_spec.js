@@ -128,7 +128,7 @@ describe("Vote", () => {
         done();
       })
       .catch((err) => {
-        expect(err.message).toContain("value has to be 1 or -1 in order to create a vote");
+        expect(err.message).toContain("Validation isIn on value failed");
         done();
       })
     });
