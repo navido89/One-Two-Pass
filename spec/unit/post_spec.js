@@ -169,7 +169,7 @@ describe("#setUser()", () => {
   describe("#getPoints()", () => {
 
     it("should return the counts of votes per post", (done) => {
-        expect(this.post.getPoints()).toBe(0);
+        expect(this.post.getPoints()).toBe(1);
 
         Vote.create({
             value: 1,
@@ -184,7 +184,7 @@ describe("#setUser()", () => {
             }]
         })
           .then((post) => {
-            expect(post.getPoints()).toBe(1);
+            expect(post.getPoints()).toBe(2);
             done();
           })
           .catch((err) => {
@@ -208,7 +208,7 @@ describe("#setUser()", () => {
             }]
         })
         .then((post) => {
-            expect(post.hasUpvoteFor(this.user.id)).toBeFalsy();
+            expect(post.hasUpvoteFor(this.user.id)).toBeTruthy();
             Vote.create({
                 value: 1,
                 userId: this.user.id,
