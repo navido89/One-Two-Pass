@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-  <% include ../static/partials/head.ejs %>
+    <% include ../static/partials/head.ejs %>
   </head>
   <body>
-    <main> 
-  <p> "About Us"</p>
-  <% include ../static/partials/navbar.ejs %>  
+    <main class="container">
+      <% include ../static/partials/navbar.ejs %>
+
+      <h1>About Us</h1>
+
+      <p>Bloccit is a website that has been created in order to provide people a platform to dicuss any topic as they wish. This application was built using Node.JS. </p>
+
     </main>
+    <% include ../static/partials/baseScripts.ejs %>
+
   </body>
-</html>              
+</html>
