@@ -2,14 +2,40 @@
 <html>
   <head>
     <% include ../static/partials/head.ejs %>
+    <style>
+    
+    body{background-image: url("/images/landingPic2.jpeg");
+    background-size:cover;
+    color: white;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
+  </style>
+    
   </head>
   <body>
     <main class="container">
       <% include ../static/partials/navbar.ejs %>
 
-      <h1>About Us</h1>
+      <h1 style="margin-top:2%">About Us</h1>
 
-      <p>Bloccit is a website that has been created in order to provide people a platform to dicuss any topic as they wish. This application was built using Node.JS. </p>
+     <div style = "font-size: 20px">
+      <p>OneTwoPass is a website that has been created in order to provide people a platform to dicuss any soccer related topic as they wish. This application was built using
+        <ul style = "margin-top: 5%;">
+          <li> Node.JS</li>
+          <li> Express</li>
+          <li> PostgreSQL</li>
+          <li> Jasmine</li>
+          <li> Embedded JavaScript</li>
+        </ul>
+        <p style="margin-top: 10%; font-size:20px">Furthermore the app was developed by using Test Driven Development technique to provide reliable and working code. User can create, topics, posts, and comments as well as vote and favorite posts.</p>
+      </p>
+    </div>
 
     </main>
     <% include ../static/partials/baseScripts.ejs %>

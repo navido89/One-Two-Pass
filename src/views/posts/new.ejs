@@ -2,6 +2,19 @@
 <html>
   <head>
     <% include ../static/partials/head.ejs %>
+    <style>
+        body{background-image: url("/images/landingPic2.jpeg");
+        background-size:cover;
+        color: white;
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -o-background-size: 100% 100%;
+        height: 100vh;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        }
+      </style>
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
@@ -10,19 +23,19 @@
 
         <% include ../static/partials/messages.ejs %>
 
-      <h1>New Post</h1>
+      <h1 style="margin-top:2%">New Post</h1>
 
       <form action="/topics/<%= topicId %>/posts/create" method="post">
         <div class="form-group">
           <label for="title">Post title</label>
           <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
-          <small class="text-muted" id="titleHelp">title must be 2 or more characters in length.</small>
+          <small id="titleHelp">title must be 2 or more characters in length.</small>
 
         </div>
         <div class="form-group">
           <label for="body">Post body</label>
           <textarea rows="4" class="form-control" name="body" placeholder="Enter Post body"></textarea>
-          <small class="text-muted" id="bodyHelp">body must be 10 or more characters in length.</small>
+          <small id="bodyHelp">body must be 10 or more characters in length.</small>
 
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
